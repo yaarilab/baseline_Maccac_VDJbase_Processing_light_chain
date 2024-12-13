@@ -110,9 +110,9 @@ ch_empty_file_1 = file("$baseDir/.emptyfiles/NO_FILE_1", hidden:true)
 ch_empty_file_2 = file("$baseDir/.emptyfiles/NO_FILE_2", hidden:true)
 ch_empty_file_3 = file("$baseDir/.emptyfiles/NO_FILE_3", hidden:true)
 
-Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_93;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_47;g_2_germlineFastaFile_g0_12}
+Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_93;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_47;g_2_germlineFastaFile_g0_12}
 Channel.fromPath(params.d_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_3_germlineFastaFile_g0_16;g_3_germlineFastaFile_g0_12;g_3_germlineFastaFile_g11_16;g_3_germlineFastaFile_g11_12}
-Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_4_germlineFastaFile_g_91;g_4_germlineFastaFile_g0_17;g_4_germlineFastaFile_g0_12}
+Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_4_germlineFastaFile_g_91;g_4_germlineFastaFile_g_101;g_4_germlineFastaFile_g0_17;g_4_germlineFastaFile_g0_12}
 Channel.fromPath(params.airr_seq, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_94_fastaFile_g0_9;g_94_fastaFile_g0_12}
 
 
@@ -640,6 +640,7 @@ process Undocumented_Alleles_J {
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*novel-passed_J.tsv$/) "novel_report/$filename"}
 input:
  set val(name),file(airr_file) from g0_19_outputFileTSV0_g_101
+ set val(v_germline_name), file(J_germline_file) from g_4_germlineFastaFile_g_101
 
 output:
  set val(name),file("*novel-passed_J.tsv") optional true  into g_101_outputFileTSV00
@@ -959,6 +960,7 @@ publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*
 input:
  set val(name),file(airrFile) from g0_19_outputFileTSV0_g_68
  set val(name1), file(germline_file) from g0_12_germlineFastaFile1_g_68
+ set val(name2), file(v_germline_file) from g_2_germlineFastaFile_g_68
 
 output:
  file "*pdf"  into g_68_outputFilePdf00
@@ -1018,6 +1020,7 @@ publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*
 publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /V_novel_germline.fasta$/) "v_refs/$filename"}
 input:
  set val(name),file(airr_file) from g0_19_outputFileTSV0_g_8
+ set val(v_germline_name), file(v_germline_file) from g_2_germlineFastaFile_g_8
 
 output:
  set val(name),file("*novel-passed.tsv") optional true  into g_8_outputFileTSV00
