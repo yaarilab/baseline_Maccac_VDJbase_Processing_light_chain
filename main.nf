@@ -111,7 +111,7 @@ ch_empty_file_2 = file("$baseDir/.emptyfiles/NO_FILE_2", hidden:true)
 ch_empty_file_3 = file("$baseDir/.emptyfiles/NO_FILE_3", hidden:true)
 
 Channel.fromPath(params.v_germline_file, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_2_germlineFastaFile_g_93;g_2_germlineFastaFile_g_68;g_2_germlineFastaFile_g_8;g_2_germlineFastaFile_g0_22;g_2_germlineFastaFile_g0_43;g_2_germlineFastaFile_g0_47;g_2_germlineFastaFile_g0_12}
-Channel.fromPath(params.d_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_3_germlineFastaFile_g0_16;g_3_germlineFastaFile_g0_12;g_3_germlineFastaFile_g11_16;g_3_germlineFastaFile_g11_12}
+Channel.fromPath(params.d_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_3_germlineFastaFile_g_137;g_3_germlineFastaFile_g0_16;g_3_germlineFastaFile_g0_12;g_3_germlineFastaFile_g11_16;g_3_germlineFastaFile_g11_12}
 Channel.fromPath(params.j_germline, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_4_germlineFastaFile_g_91;g_4_germlineFastaFile_g_101;g_4_germlineFastaFile_g0_17;g_4_germlineFastaFile_g0_12}
 Channel.fromPath(params.airr_seq, type: 'any').map{ file -> tuple(file.baseName, file) }.into{g_94_fastaFile_g0_9;g_94_fastaFile_g0_12}
 
@@ -2042,6 +2042,7 @@ rmarkdown::render("${rmk}", clean=TRUE, output_format="html_document", output_di
 }
 
 g_70_germlineFastaFile0_g_137= g_70_germlineFastaFile0_g_137.ifEmpty([""]) 
+g_3_germlineFastaFile_g_137= g_3_germlineFastaFile_g_137.ifEmpty([""]) 
 g_102_germlineFastaFile0_g_137= g_102_germlineFastaFile0_g_137.ifEmpty([""]) 
 
 
@@ -2051,6 +2052,7 @@ publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*
 input:
  set val(name),file(airrFile) from g11_12_outputFileTSV0_g_137
  set val(name1), file(v_germline_file) from g_70_germlineFastaFile0_g_137
+ set val(name2), file(d_germline_file) from g_3_germlineFastaFile_g_137
  set val(name3), file(j_germline_file) from g_102_germlineFastaFile0_g_137
 
 output:
